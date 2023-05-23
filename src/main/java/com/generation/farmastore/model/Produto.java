@@ -1,6 +1,11 @@
 package com.generation.farmastore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_produto")
@@ -9,12 +14,26 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Esse campo não pode estar vazio")
+    @Size(min = 10, max = 100, message = "Campo com restrição de tamanho")
     private String nome;
+
+    @NotBlank(message = "Esse campo não pode estar vazio")
+    @Size(min = 10, max = 100, message = "Campo com restrição de tamanho")
     private String descricao;
+
+    @NotNull(message = "Esse campo não pode ser nulo")
+    @Positive(message = "Esse campo tem que ser positivo")
     private Integer quantidade;
+    @NotNull(message = "Esse campo não pode ser nulo")
+    @Positive(message = "Esse campo tem que ser positivo")
+    private Double preco;
     private String laboratorio;
     private String foto;
 
+    @ManyToOne
+    @JsonIgnoreProperties("produto")
     private Categoria categoria;
 
     public Long getId() {
@@ -47,6 +66,14 @@ public class Produto {
 
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
     }
 
     public String getLaboratorio() {
