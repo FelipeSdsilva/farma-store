@@ -10,8 +10,7 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String tipo;
-    private String marca;
-
+    private String descricao;
 
     public Long getId() {
         return id;
@@ -29,11 +28,11 @@ public class Categoria {
         this.tipo = tipo;
     }
 
-    public String getMarca() {
-        return marca;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }
